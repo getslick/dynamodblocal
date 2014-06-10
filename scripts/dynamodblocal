@@ -1,4 +1,4 @@
-#! python
+#!/usr/bin/python
 
 from optparse import OptionParser
 import subprocess
@@ -17,7 +17,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    command = ['java', '-Djava.library.path=./DynamoDBLocal_lib', '-jar DynamoDBLocal.jar']
+    command = ['java', '-Djava.library.path=./DynamoDBLocal_lib', '-jar', os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal.jar')]
 
     if options.port:
         command.append('-port %s' % options.port)
