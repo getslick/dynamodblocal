@@ -2,7 +2,7 @@
 
 from optparse import OptionParser
 import subprocess
-
+import os
 def main():
     usage = "usage: %prog [options] arg"
     parser = OptionParser(usage)
@@ -20,14 +20,16 @@ def main():
     command = ['java', '-Djava.library.path=./DynamoDBLocal_lib', '-jar', os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal.jar')]
 
     if options.port:
-        command.append('-port %s' % options.port)
+        command.extend(['-port',options.port])
 
     if options.dbPath:
-        command.append('-dbPath %s' % options.dbPath)
+        command.extend(['-dbPath',options.dbPath])
     elif options.inMemory:
         command.append('-inMemory')
 
-    local_db = subprocess.Popen(command)
+    print command
+
+    local_db = subprocess.call(command)
 
 if __name__ == "__main__":
     main()
