@@ -27,8 +27,6 @@ def main():
     elif options.inMemory:
         command.append('-inMemory')
 
-    print command
-
     local_db = subprocess.call(command)
 
 if __name__ == "__main__":
