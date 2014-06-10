@@ -1,0 +1,33 @@
+#! python
+
+from optparse import OptionParser
+import subprocess
+
+def main():
+    usage = "usage: %prog [options] arg"
+    parser = OptionParser(usage)
+    parser.add_option('--port', dest="port",
+                      help=" The port number that DynamoDB Local will use to communicate with your application. If you do not specify this option, the default port is 8000.")
+
+    parser.add_option('--dbPath', dest='dbPath',
+                      help="The directory where DynamoDB Local will write its database file. If you do not specify this option, the file will be written to the current directory.")
+
+    parser.add_option('--inMemory', dest='inMemory',
+        help='Instead of using a database file, DynamoDB Local will run in memory. When you stop DynamoDB Local, none of the data will be saved.')
+
+    (options, args) = parser.parse_args()
+
+    command = ['java', '-Djava.library.path=./DynamoDBLocal_lib', '-jar DynamoDBLocal.jar']
+
+    if options.port:
+        command.append('-port %s' % options.port)
+
+    if options.dbPath:
+        command.append('-dbPath %s' % options.dbPath)
+    elif options.inMemory:
+        command.append('-inMemory')
+
+    local_db = subprocess.Popen(command)
+
+if __name__ == "__main__":
+    main()
