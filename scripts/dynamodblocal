@@ -1,8 +1,21 @@
-#!/usr/bin/python
+#!/Users/millarm/projects/tellybug/webserver/bin/python
 
 from optparse import OptionParser
 import subprocess
 import os
+import signal
+import sys
+
+local_db = None
+
+def signal_handler(signal, frame):
+    if local_db:
+        local_db.terminate()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+
 def main():
     usage = "usage: %prog [options] arg"
     parser = OptionParser(usage)
@@ -27,7 +40,9 @@ def main():
     elif options.inMemory:
         command.append('-inMemory')
 
-    local_db = subprocess.call(command)
+    global local_db
+    local_db = subprocess.Popen(command)
+    signal.pause()
 
 if __name__ == "__main__":
     main()
