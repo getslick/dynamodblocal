@@ -16,7 +16,7 @@ class CustomInstall(install):
 
 setup(
     name='dynamodblocal',
-    version='0.1dev',
+    version='0.2dev',
     packages=['dynamodblocal',],
     license='The MIT License (MIT)',
     long_description=open('README.txt').read(),
