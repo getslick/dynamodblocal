@@ -30,7 +30,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    command = ['java', '-Djava.library.path='+os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal_lib'), '-jar', os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal.jar')]
+    command = ['java', '-Xmx1024m', '-Djava.library.path='+os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal_lib'), '-jar', os.path.join(os.path.dirname(os.path.abspath(__file__)),'DynamoDBLocal.jar')]
 
     if options.port:
         command.extend(['-port',options.port])
