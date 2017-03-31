@@ -8,7 +8,7 @@ class CustomInstall(install):
     def run(self):
         install.run(self)
         print "Installing latest dynamodblocal"
-        f, response = urllib.urlretrieve("https://dynamodb-local.s3-accelerate.amazonaws.com/dynamodb_local_latest.tar.gz")
+        f, response = urllib.urlretrieve("https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz")
         bundle = tarfile.open(f)
         bundle.extractall(path=self.install_scripts)
         os.remove(f)
