@@ -1,6 +1,6 @@
 from distutils.core import setup
 from setuptools.command.install import install
-import urllib
+import urllib.request
 import tarfile
 import os
 
@@ -8,7 +8,7 @@ class CustomInstall(install):
     def run(self):
         install.run(self)
         print("Installing latest dynamodblocal")
-        f, response = urllib.urlretrieve("https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz")
+        f, response = import urllib.request.urlretrieve("https://s3.eu-central-1.amazonaws.com/dynamodb-local-frankfurt/dynamodb_local_latest.tar.gz")
         bundle = tarfile.open(f)
         bundle.extractall(path=self.install_scripts)
         os.remove(f)
